@@ -1,0 +1,43 @@
+
+.unauthPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /*background: linear-gradient(135deg, teal, #764ba2);*/
+    font-family: 'Poppins', sans-serif;
+    
+    
+}
+.unauthContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  color: white;
+}
+.unauthContainer h1{
+    font-family: "Bungee Spice", sans-serif;
+}
+.unauthBtn{
+    width: 100%;
+    padding: 5%;
+    margin:5px;
+    border: 2px solid var(--themecolor) ;
+    margin-top: 20px;
+    background:none;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-size:20px;
+   
+}
+.unauthBtn:hover{
+    background-color: var(--themecolor);
+}

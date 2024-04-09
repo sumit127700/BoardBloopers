@@ -1,0 +1,112 @@
+
+.account-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+   
+  }
+  
+  .account-container {
+    max-width: 400px;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .avatar {
+    width: 60px;
+    height: 60px;
+    background-color: var(--themecolor);
+    color: #fff;
+    font-size: 24px;
+    font-weight: normal;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .account-page h1{
+    margin-bottom: 30px;
+    color: white;
+    font-weight: normal;
+    font-family: "Bungee Spice", sans-serif;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    text-align: left;
+  }
+  
+  .account-page label{
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    margin-bottom: 5px;
+  
+    color: white;
+  }
+  .mailclassleft{
+    width:100%;
+    overflow: hidden;
+  }
+  
+  
+  .account-page input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+  }
+  
+  .update-button {
+    background: none;
+    border: 2px var(--themecolor) solid;
+    color: #fff;
+  
+    padding: 10px 20px;
+    font-size: 16px;
+    
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .update-button:hover {
+    background-color: var(--themecolor);
+  }
+  .update-button:disabled,
+.update-button[disabled]{
+  border:none;
+  background-color: rgb(131, 187, 187);
+  color: white;
+  cursor:inherit;
+}
+.update-button:disabled:hover,
+.update-button[disabled]:hover{
+  border:none;
+  background-color: rgb(131, 187, 187);
+  color: white;
+ 
+}
+  .signout-button {
+    background: none;
+    border: 2px var(--themecolor) solid;
+    color: #fff;
+    margin-top:10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .signout-button:hover {
+    background-color: var(--themecolor);
+  }

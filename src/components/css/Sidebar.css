@@ -1,0 +1,82 @@
+
+.sidebar {
+    font-family: "Rajdhani", sans-serif;
+    width:20%;
+    left:0;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    transition: 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    align-items: center;
+}
+
+.sidebar.open {
+   
+    width:0;
+}
+
+
+
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    height: 24%;
+    width: 100%;
+}
+
+.sidebar ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    transition: 0.3s ease-in-out;
+    
+    font-size:30px;
+}
+.sidebar ul li:hover{
+    background-color: var(--themecolor);
+    
+}
+.account-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.account-header img{
+
+width: 70%;
+}
+.avatar-sidebar {
+    
+    width: 120px;
+    height: 120px;
+    background-color: var(--themecolor);
+    color: #fff;
+    font-size: 50px;
+    margin-top: 30px;
+    font-weight: normal;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  @media only screen and (max-width: 768px) {
+    .sidebar{
+        width:100vw;
+        background: rgba(0,0,0,1);
+        z-index: 1200;
+        transition: 0s ease-in-out;
+    }
+  }

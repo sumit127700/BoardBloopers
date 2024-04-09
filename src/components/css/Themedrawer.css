@@ -1,0 +1,82 @@
+.themedrawer{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    width:100%;
+    
+    align-items: start;
+   
+    
+}
+
+.changeThemeButton{
+    width:48%;
+    background:none;
+    border: 2px var(--themecolor) solid;
+    color: white;
+    font-size:30px;
+    font-family:"Orbitron", sans-serif;
+    padding: 5%;
+    cursor: pointer;
+    margin-right: 2%;
+}
+.buttonThemeContainer{
+    width: 100%;
+    margin:2%;
+}
+.headerForTheme{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    padding:5%;
+    border: 2px solid var(--themecolor) ;
+    font-family:"Orbitron", sans-serif;
+    
+    color: #fff;
+    
+    transition: 0.3s ease-in-out;
+    font-size:30px;
+}
+.tealbtn{
+    border: 2px teal solid;
+}
+.purplebtn{
+    border: 2px purple solid;
+}
+.orangebtn{
+    border: 2px orange solid;
+}
+.pinkbtn{
+    border: 2px pink solid;
+}
+.bluebtn{
+    border: 2px blue solid;
+}
+.greenbtn{
+    border: 2px green solid;
+}
+.tealselected{
+    background: teal;
+}
+.purpleselected{
+    background: purple;
+}
+.orangeselected{
+    background: orange;
+}
+.blueselected{
+    background: blue;
+}
+.greenselected{
+    background: green;
+}
+.pinkselected{
+    background: pink;
+}
+@media only screen and (max-width: 768px) {
+    .changeThemeButton{
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,39 @@
+.rowChess {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.rowChess button {
+  color: white;
+  height: 60px;
+  width: 60px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Orbitron", sans-serif;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+.pieceImage {
+  height: 55px;
+  width: 55px;
+}
+.blackSquare {
+  background: rgb(118, 150, 86);
+}
+.whiteSquare {
+  background: rgb(238, 238, 210);
+}
+.whiteSelected {
+  background-color: rgb(186, 202, 68);
+}
+.blackSelected {
+  background-color: rgb(186, 202, 68);
+}
+.possibleMove {
+  height: 20px;
+  width: 20px;
+  background: rgba(93, 92, 92, 0.4);
+  border-radius: 50%;
+}

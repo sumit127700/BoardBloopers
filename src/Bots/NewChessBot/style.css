@@ -1,0 +1,11 @@
+.ChessBoardContainer {
+  height: 35%;
+  width: 35%;
+}
+.ChessPage {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}

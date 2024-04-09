@@ -1,38 +1,36 @@
-.App {
-  text-align: center;
+*{
+  box-sizing: border-box;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App{
+  display: flex;
+ justify-content: stretch;
+ background-image: url('https://wallpapers.com/images/hd/plain-black-with-wooden-pattern-09v7n22juf06luep.jpg');
+ overflow: hidden;
+ 
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Content{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width:100vw;
+  overflow: hidden;
+ 
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (max-width: 768px) {
+  .Content{
+    width:100vw;
+    box-sizing: border-box;
+    overflow:hidden;
   }
-  to {
-    transform: rotate(360deg);
+  .OpenContent{
+      display: none;
+      width:0vw;
+    
+      overflow: hidden;
+  }
+  .App{
+    box-sizing: border-box;
+    overflow: scroll;
+    transition: 0.3s ease-in;
   }
 }

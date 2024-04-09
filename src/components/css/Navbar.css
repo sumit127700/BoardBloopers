@@ -1,0 +1,68 @@
+:root{
+  --themecolor:teal;
+}
+.navbar {
+  font-family: "Bungee Spice", sans-serif;
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100px;
+  left:0;
+  color:white;
+  padding: 1rem;
+  display: flex;
+ padding-left: 2%;
+  transition: 0.3s ease-in-out;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar.open {
+  
+  left:250px;
+}
+.left-heading{
+  display: flex;
+  width: 18%;
+  align-items: center;
+  justify-content: space-between;
+}
+.right-heading{
+  position: fixed;
+  right:20px;
+}
+.navbar h1 {
+  margin: 0;
+  font-weight:normal;
+}
+.navbar button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  margin-right:2%;
+  border: 1px white solid;
+}
+
+.navbar button:hover{
+ background: var(--themecolor);
+border-color: var(--themecolor);
+}
+@media only screen and (max-width: 768px) {
+  .navbar{
+      width:100vw;
+      position: relative;
+      
+  }
+  .right-heading{
+    display: none;
+  }
+  .left-heading{
+    width: 100vw;
+    margin-right:20px;
+  }
+  .navbar h1 {
+    margin: 0;
+    font-size: 150%;
+  }
+}
