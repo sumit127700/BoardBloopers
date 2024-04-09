@@ -153,7 +153,7 @@ const App = () => {
                     }
                     playerModeforTicTacToe={playerModeforTicTacToe}
                     setPlayerModeforTicTacToe={setPlayerModeforTicTacToe}
-                    component={ChessBot}
+                    component={ChessGame}
                   />
                 }
               />
