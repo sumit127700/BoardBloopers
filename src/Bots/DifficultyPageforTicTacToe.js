@@ -1,6 +1,7 @@
 import "./css/TicTacToe.css";
 import "./css/General.css";
 import { useNavigate } from "react-router-dom";
+
 function TrueSelectorButton({ difficultyMode, content, setValueforBtn }) {
   if (difficultyMode)
     return (
@@ -73,7 +74,7 @@ export default function DifficultyPageforTicTacToe({
           setValueforBtn={setDifficultyModeforTicTacToe}
         />
       </div>
-      <div className="headerTicTacToe">Who goes first!</div>
+      <div className="headerForBots">Who goes first!</div>
       <div className="difficultyRow">
         <TrueSelectorButton
           difficultyMode={playerModeforTicTacToe}
