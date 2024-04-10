@@ -17,16 +17,19 @@ const AccountPage = ({ setprogressbar, setUsername, username, email }) => {
     setprogressbar(true);
     setdisabled(true);
     const user = auth.currentUser;
-    await updateProfile(user, {
-      displayName: usernam,
-    });
-    await updatePassword(user, password)
-      .then(() => {
-        console.log("Successful");
-      })
-      .catch((error) => {
-        console.log(error);
+    if (usernam !== null)
+      await updateProfile(user, {
+        displayName: usernam,
       });
+    if (password !== "")
+      await updatePassword(user, password)
+        .then(() => {
+          console.log("Successful");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    if (usernam !== "");
     setUsername(usernam);
 
     setdisabled(false);
@@ -48,7 +51,7 @@ const AccountPage = ({ setprogressbar, setUsername, username, email }) => {
       <div className="account-container">
         <div className="avatar">{userinitials}</div>
         <h1>User Account</h1>
-        <div onSubmit={handleUpdate}>
+        <div>
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -59,7 +62,6 @@ const AccountPage = ({ setprogressbar, setUsername, username, email }) => {
               onChange={(e) => {
                 setUsernam(e.target.value);
               }}
-              required
             />
           </div>
           <div className="form-group">
@@ -78,10 +80,14 @@ const AccountPage = ({ setprogressbar, setUsername, username, email }) => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
-              required
             />
           </div>
-          <button type="submit" className="update-button" disabled={isdisabled}>
+          <button
+            type="submit"
+            className="update-button"
+            disabled={isdisabled}
+            onClick={handleUpdate}
+          >
             Update Account
           </button>
           <button className="signout-button" onClick={handleLogout}>
