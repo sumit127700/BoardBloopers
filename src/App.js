@@ -21,7 +21,8 @@ import TicTacToe from "./Bots/TicTacToe";
 import DifficultyPageforTicTacToe from "./Bots/DifficultyPageforTicTacToe";
 import ComingSoon from "./components/ComingSoon";
 import ChessBot from "./Bots/ChessBot";
-import ChessGame from "./Bots/NewChessBot/ChessGame";
+import DifficultyPageforChess from "./Bots/DifficultyPageforChess";
+
 const App = () => {
   const [username, setUsername] = useState("defaultUser");
   const [isloggedin, setisloggedin] = useState(false);
@@ -32,6 +33,8 @@ const App = () => {
   const [difficultyModeforTicTacToe, setDifficultyModeforTicTacToe] =
     useState(true);
   const [playerModeforTicTacToe, setPlayerModeforTicTacToe] = useState(true);
+  const [difficultyModeforChess, setDifficultyModeforChess] = useState(1);
+  const [playerModeforChess, setPlayerModeforChess] = useState(true);
   const [progressbar, setprogressbar] = useState(false);
   const [colorheading, setColor] = useState("teal");
   const [isSmallScreen, setSmallScreen] = useState("false");
@@ -147,19 +150,16 @@ const App = () => {
                     setEmail={setEmail}
                     isloggedin={isloggedin}
                     checkinglogin={checkinglogin}
-                    difficultyModeforTicTacToe={difficultyModeforTicTacToe}
-                    setDifficultyModeforTicTacToe={
-                      setDifficultyModeforTicTacToe
-                    }
-                    playerModeforTicTacToe={playerModeforTicTacToe}
-                    setPlayerModeforTicTacToe={setPlayerModeforTicTacToe}
-                    component={ChessGame}
+                    difficultyModeforChess={difficultyModeforChess}
+                    setDifficultyModeforChess={setDifficultyModeforChess}
+                    playerModeforChess={playerModeforChess}
+                    setPlayerModeforChess={setPlayerModeforChess}
+                    component={ChessBot}
                   />
                 }
               />
-
               <Route
-                path="NewChessBot"
+                path="DifficultyPageforChess"
                 element={
                   <Protected
                     progressbar={progressbar}
@@ -170,13 +170,11 @@ const App = () => {
                     setEmail={setEmail}
                     isloggedin={isloggedin}
                     checkinglogin={checkinglogin}
-                    difficultyModeforTicTacToe={difficultyModeforTicTacToe}
-                    setDifficultyModeforTicTacToe={
-                      setDifficultyModeforTicTacToe
-                    }
-                    playerModeforTicTacToe={playerModeforTicTacToe}
-                    setPlayerModeforTicTacToe={setPlayerModeforTicTacToe}
-                    component={ChessGame}
+                    difficultyModeforChess={difficultyModeforChess}
+                    setDifficultyModeforChess={setDifficultyModeforChess}
+                    playerModeforChess={playerModeforChess}
+                    setPlayerModeforChess={setPlayerModeforChess}
+                    component={DifficultyPageforChess}
                   />
                 }
               />

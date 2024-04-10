@@ -15,7 +15,7 @@ function BotPage() {
         navigate("DifficultyPageforTicTacToe");
       }}
       secondButtonHandler={() => {
-        navigate("ChessBot");
+        navigate("DifficultyPageforChess");
       }}
       thirdButtonHandler={true}
       fouthButtonHandler={false}

@@ -1,39 +1,40 @@
-.rowChess {
-  width: 100%;
+.ChessBoardContainer {
+  width: 70%;
+}
+.card {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
-.rowChess button {
-  color: white;
-  height: 60px;
-  width: 60px;
-  border: none;
+.headerForBots {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  border: 2px solid var(--themecolor);
   font-family: "Orbitron", sans-serif;
-  transition: 0.3s ease;
+  background: none;
+  color: #fff;
+
+  transition: 0.3s ease-in-out;
+  font-size: 30px;
+}
+.clearBoard {
+  width: 100%;
+  padding: 5%;
+  margin: 5px;
+  border: 2px solid var(--themecolor);
+  margin-top: 20px;
+  background: none;
+  color: #fff;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
+  font-size: 30px;
+  font-family: "Orbitron", sans-serif;
 }
-.pieceImage {
-  height: 55px;
-  width: 55px;
-}
-.blackSquare {
-  background: rgb(118, 150, 86);
-}
-.whiteSquare {
-  background: rgb(238, 238, 210);
-}
-.whiteSelected {
-  background-color: rgb(186, 202, 68);
-}
-.blackSelected {
-  background-color: rgb(186, 202, 68);
-}
-.possibleMove {
-  height: 20px;
-  width: 20px;
-  background: rgba(93, 92, 92, 0.4);
-  border-radius: 50%;
+.clearBoard:hover {
+  background-color: var(--themecolor);
 }

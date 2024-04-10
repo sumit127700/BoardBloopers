@@ -1,154 +1,87 @@
-import { useState } from "react";
-import "./css/General.css";
+import React, { useState, useEffect } from "react";
+import { Chessboard } from "react-chessboard";
+import Chess from "./Chess/chess.js";
 import "./css/ChessBot.css";
-import br from "../images/br.png";
-import bb from "../images/bb.png";
-import bn from "../images/bn.png";
-import bq from "../images/bq.png";
-import bk from "../images/bk.png";
-import bp from "../images/bp.png";
-import wr from "../images/wr.png";
-import wb from "../images/wb.png";
-import wn from "../images/wn.png";
-import wq from "../images/wq.png";
-import wk from "../images/wk.png";
-import wp from "../images/wp.png";
-import { getAvailableMoves } from "./Chess/getAvailableMoves";
-const images = { br, bb, bn, bq, bk, bp, wr, wb, wn, wq, wk, wp };
-export default function ChessBot() {
-  const [val, setVal] = useState([
-    ["br", "bb", "bn", "bq", "bk", "bn", "bb", "br"],
-    ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", "", ""],
-    ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
-    ["wr", "wb", "wn", "wq", "wk", "wn", "wb", "wr"],
-  ]);
-  const [dotVal, setDotVal] = useState([
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-  ]);
-  const ClickedAtIndex = (xx, yy) => {
-    if (val[xx][yy] !== "" && (isSelected[0] !== xx || isSelected[1] !== yy)) {
-      setSelected([xx, yy]);
-      let z = getAvailableMoves(val, xx, yy);
-      let b = [
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-      ];
-      for (let zz of z) {
-        b[zz[0]][zz[1]] = 1;
+import minimaxRoot from "./Chess/ChessBotAlgo.js";
+const ChessBot = ({ difficultyModeforChess }) => {
+  const [game, setGame] = useState(new Chess());
+  const [isWhiteWinning, setIsWhiteWinning] = useState(false);
+  const [isBlackWinning, setIsBlackWinning] = useState(false);
+  const [isDraw, setIsDraw] = useState(false);
+  const [header, setHeader] = useState("Can you Win?");
+  function makeAMove(move) {
+    const gameCopy = { ...game };
+    const result = gameCopy.move(move);
+    setGame(gameCopy);
+    return result; // null if the move was illegal, the move object if the move was legal
+  }
+
+  function makeBestMove() {
+    if (isBlackWinning || isWhiteWinning || isDraw || game.game_over()) return;
+    const gameCopy = { ...game };
+    const bestmove = minimaxRoot(3, gameCopy, true);
+    if (isBlackWinning || isWhiteWinning || isDraw || game.game_over()) return;
+    gameCopy.ugly_move(bestmove);
+    setGame(game);
+  }
+
+  function onDrop(sourceSquare, targetSquare) {
+    if (isBlackWinning || isWhiteWinning || isDraw) return false;
+    const move = makeAMove({
+      from: sourceSquare,
+      to: targetSquare,
+      promotion: "q", // always promote to a queen for example simplicity
+    });
+
+    // illegal move
+    if (move === null) return false;
+    if (isBlackWinning || isWhiteWinning || isDraw) return false;
+    setTimeout(makeBestMove, 100);
+    return true;
+  }
+  function resetBoard() {
+    const gameCopy = { ...game };
+    gameCopy.reset();
+    setIsWhiteWinning(false);
+    setIsBlackWinning(false);
+    setIsDraw(false);
+    setHeader("Can you Win?");
+    setGame(gameCopy);
+  }
+  useEffect(() => {
+    updateGameStatus();
+  }, [game.fen()]);
+  function updateGameStatus() {
+    if (game.game_over()) {
+      if (game.in_checkmate()) {
+        if (game.turn() === "w") {
+          setIsBlackWinning(true);
+          setHeader("Bot Wins!");
+        } else {
+          setIsWhiteWinning(true);
+          setHeader("You Win!");
+        }
+      } else {
+        setIsDraw(true);
+        setHeader("Its a Draw!");
       }
-      setDotVal(b);
-      console.log(b);
     } else {
-      setSelected([-1, -1]);
-      setDotVal([
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-      ]);
+      setIsWhiteWinning(false);
+      setIsBlackWinning(false);
+      setIsDraw(false);
     }
-  };
-
-  const [isSelected, setSelected] = useState([-1, -1]);
-  const renderChessBoard = () => {
-    let board = [];
-    for (let i = 0; i < 8; i++) {
-      let row = [];
-      for (let j = 0; j < 8; j++) {
-        if ((i + j) % 2 == 0)
-          row.push(
-            <button
-              className={
-                isSelected[0] === i
-                  ? isSelected[1] === j
-                    ? "whiteSquare whiteSelected"
-                    : "whiteSquare"
-                  : "whiteSquare"
-              }
-              onClick={() => ClickedAtIndex(i, j)}
-            >
-              {dotVal[i][j] === 1 ? (
-                val[i][j] === "" ? (
-                  <div className="possibleMove"></div>
-                ) : (
-                  <></>
-                )
-              ) : (
-                <></>
-              )}
-              {val[i][j] !== "" ? (
-                <img className="pieceImage" src={images[val[i][j]]} />
-              ) : (
-                <></>
-              )}
-            </button>
-          );
-        else
-          row.push(
-            <button
-              className={
-                isSelected[0] === i
-                  ? isSelected[1] === j
-                    ? "blackSquare blackSelected"
-                    : "blackSquare"
-                  : "blackSquare"
-              }
-              onClick={() => ClickedAtIndex(i, j)}
-            >
-              {dotVal[i][j] === 1 ? (
-                val[i][j] === "" ? (
-                  <div className="possibleMove"></div>
-                ) : (
-                  <></>
-                )
-              ) : (
-                <></>
-              )}
-
-              {val[i][j] !== "" ? (
-                <img className="pieceImage" src={images[val[i][j]]} />
-              ) : (
-                <></>
-              )}
-            </button>
-          );
-      }
-      board.push(<div className="rowChess">{row}</div>);
-    }
-    return board;
-  };
-
+  }
   return (
     <div className="card">
-      <div className="headerForBots">Can you Win</div>
-      {renderChessBoard()}
-      <button
-        className="clearBoard"
-        onClick={() => setVal(Array(64).fill(null))}
-      >
-        Clear Board
+      <div className="headerForBots">{header}</div>
+      <div className="ChessBoardContainer">
+        <Chessboard position={game.fen()} onPieceDrop={onDrop} />
+      </div>
+      <button className="clearBoard" onClick={resetBoard}>
+        Reset Game
       </button>
     </div>
   );
-}
+};
+
+export default ChessBot;
