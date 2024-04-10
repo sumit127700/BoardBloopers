@@ -19,7 +19,7 @@ const ChessBot = ({ difficultyModeforChess }) => {
   function makeBestMove() {
     if (isBlackWinning || isWhiteWinning || isDraw || game.game_over()) return;
     const gameCopy = { ...game };
-    const bestmove = minimaxRoot(3, gameCopy, true);
+    const bestmove = minimaxRoot(difficultyModeforChess, gameCopy, true);
     if (isBlackWinning || isWhiteWinning || isDraw || game.game_over()) return;
     gameCopy.ugly_move(bestmove);
     setGame(game);
