@@ -14,22 +14,26 @@ const AccountPage = ({ setprogressbar, setUsername, username, email }) => {
   const [isdisabled, setdisabled] = React.useState(false);
 
   const handleUpdate = async () => {
+    if (usernam.length < 6 || (password !== "" && password.length < 6)) {
+      alert("Username and Password must be at least 6 characters long.");
+      return;
+    }
     setprogressbar(true);
     setdisabled(true);
     const user = auth.currentUser;
-    if (usernam !== null)
-      await updateProfile(user, {
-        displayName: usernam,
+
+    await updateProfile(user, {
+      displayName: usernam,
+    });
+
+    await updatePassword(user, password)
+      .then(() => {
+        console.log("Successful");
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    if (password !== "")
-      await updatePassword(user, password)
-        .then(() => {
-          console.log("Successful");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    if (usernam !== "");
+
     setUsername(usernam);
 
     setdisabled(false);
@@ -62,6 +66,7 @@ const AccountPage = ({ setprogressbar, setUsername, username, email }) => {
               onChange={(e) => {
                 setUsernam(e.target.value);
               }}
+              required
             />
           </div>
           <div className="form-group">
@@ -80,6 +85,7 @@ const AccountPage = ({ setprogressbar, setUsername, username, email }) => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
+              required
             />
           </div>
           <button
