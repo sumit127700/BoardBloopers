@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./css/Sidebar.css";
 import { Outlet } from "react-router-dom";
 import { Sidebarlink } from "./Sidebarlink";
+import { useSelector, useDispatch, useStore } from "react-redux";
+import {
+  toggle,
+  setSmallScreen,
+} from "../features/sidebarFeatures/sidebarFeatures";
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Sofia"
 ></link>;
-const Sidebar = ({
-  isOpen,
-  toggle,
-  isloggedin,
-  isSmallScreen,
-  setSmallScreen,
-}) => {
+const Sidebar = () => {
+  const isloggedin = useSelector((state) => state.loginData.isLoggedIn);
+  const isOpen = useSelector((state) => state.sidebarData.isOpen);
+  const dispatch = useDispatch();
+  const isSmallScreen = useSelector((state) => state.sidebarData.isSmallScreen);
   function myFunction(x) {
     if (x.matches) {
       // If media query matches
-      setSmallScreen(true);
+      dispatch(setSmallScreen(true));
     } else {
-      setSmallScreen(false);
+      dispatch(setSmallScreen(false));
     }
   }
 
@@ -35,7 +38,13 @@ const Sidebar = ({
   return (
     <div
       className={isOpen ? "sidebar open" : "sidebar"}
-      onClick={isSmallScreen ? toggle : () => {}}
+      onClick={
+        isSmallScreen
+          ? () => {
+              dispatch(toggle());
+            }
+          : () => {}
+      }
     >
       <div className="account-header">
         <div className="avatar-sidebar">SS</div>

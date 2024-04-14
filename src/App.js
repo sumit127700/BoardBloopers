@@ -22,6 +22,13 @@ import DifficultyPageforTicTacToe from "./Bots/DifficultyPageforTicTacToe";
 import ComingSoon from "./components/ComingSoon";
 import ChessBot from "./Bots/ChessBot";
 import DifficultyPageforChess from "./Bots/DifficultyPageforChess";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setIsLoggedIn,
+  setCheckingLogin,
+  setEmailId,
+  setUsernameId,
+} from "./features/loginFeatures/loginFeatures";
 
 const App = () => {
   const [username, setUsername] = useState("defaultUser");
@@ -29,7 +36,7 @@ const App = () => {
   const [checkinglogin, setcheckinglogin] = useState(false);
   const [email, setEmail] = useState("defaultUser");
   const [theme, setTheme] = useState("teal");
-  const [isOpen, setIsOpen] = useState(true);
+  const isOpen = useSelector((state) => state.sidebarData.isOpen);
   const [difficultyModeforTicTacToe, setDifficultyModeforTicTacToe] =
     useState(true);
   const [playerModeforTicTacToe, setPlayerModeforTicTacToe] = useState(true);
@@ -38,9 +45,8 @@ const App = () => {
   const [progressbar, setprogressbar] = useState(false);
   const [colorheading, setColor] = useState("teal");
   const [isSmallScreen, setSmallScreen] = useState("false");
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
+  const dispatch = useDispatch();
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -51,6 +57,10 @@ const App = () => {
         setEmail(user.email);
         setisloggedin(true);
         setcheckinglogin(false);
+        dispatch(setIsLoggedIn(true));
+        dispatch(setCheckingLogin(false));
+        dispatch(setEmailId(user.email));
+        dispatch(setUsernameId(user.displayName));
 
         // ...
       } else {
@@ -60,27 +70,19 @@ const App = () => {
         setEmail("defaultUserMail");
         setisloggedin(false);
         setcheckinglogin(false);
+        dispatch(setIsLoggedIn(false));
+        dispatch(setCheckingLogin(false));
+        dispatch(setEmailId(""));
+        dispatch(setUsernameId(""));
       }
     });
   }, []);
   return (
     <BrowserRouter>
       <div className="App">
-        <Sidebar
-          isOpen={isOpen}
-          toggle={toggle}
-          isloggedin={isloggedin}
-          isSmallScreen={isSmallScreen}
-          setSmallScreen={setSmallScreen}
-        />
+        <Sidebar />
         <div className={isOpen ? "Content" : "Content OpenContent"}>
-          <Navbar
-            isOpen={isOpen}
-            toggle={toggle}
-            username={username}
-            setUsername={setUsername}
-            isloggedin={isloggedin}
-          />
+          <Navbar />
 
           {progressbar ? (
             <Box sx={{ width: "100%" }}>
