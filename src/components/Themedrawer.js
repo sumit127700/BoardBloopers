@@ -1,13 +1,16 @@
 import React from "react";
 
 import "./css/Themedrawer.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setTheme } from "../features/themeFeatures/themeFeatures";
 
 const ThemeMenu = (props) => {
   var r = document.querySelector(":root");
-
+  const dispatch = useDispatch();
+  const colorheading = useSelector((state) => state.theme.themeColor);
   const changeTheme = (color) => {
     r.style.setProperty("--themecolor", color);
-    props.setColor(color);
+    dispatch(setTheme(color));
   };
   const changeThemeTeal = () => {
     changeTheme("teal");
@@ -32,7 +35,7 @@ const ThemeMenu = (props) => {
     <div className="themedrawer">
       <div className="headerForTheme">Select Theme Color</div>
       <div className="buttonThemeContainer">
-        {props.colorheading === "teal" ? (
+        {colorheading === "teal" ? (
           <button
             className="changeThemeButton tealbtn tealselected"
             onClick={changeThemeTeal}
@@ -47,7 +50,7 @@ const ThemeMenu = (props) => {
             Teal
           </button>
         )}
-        {props.colorheading === "orange" ? (
+        {colorheading === "orange" ? (
           <button
             className="changeThemeButton orangebtn orangeselected"
             onClick={changeThemeOrange}
@@ -64,7 +67,7 @@ const ThemeMenu = (props) => {
         )}
       </div>
       <div className="buttonThemeContainer">
-        {props.colorheading === "purple" ? (
+        {colorheading === "purple" ? (
           <button
             className="changeThemeButton purplebtn purpleselected"
             onClick={changeThemePurple}
@@ -79,7 +82,7 @@ const ThemeMenu = (props) => {
             Purple
           </button>
         )}
-        {props.colorheading === "pink" ? (
+        {colorheading === "pink" ? (
           <button
             className="changeThemeButton pinkbtn pinkselected"
             onClick={changeThemePink}
@@ -96,7 +99,7 @@ const ThemeMenu = (props) => {
         )}
       </div>
       <div className="buttonThemeContainer">
-        {props.colorheading === "blue" ? (
+        {colorheading === "blue" ? (
           <button
             className="changeThemeButton bluebtn blueselected"
             onClick={changeThemeBlue}
@@ -111,7 +114,7 @@ const ThemeMenu = (props) => {
             Blue
           </button>
         )}
-        {props.colorheading === "green" ? (
+        {colorheading === "green" ? (
           <button
             className="changeThemeButton greenbtn greenselected"
             onClick={changeThemeGreen}

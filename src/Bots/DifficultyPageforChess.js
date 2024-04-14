@@ -1,13 +1,14 @@
 import "./css/TicTacToe.css";
 import "./css/General.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setDifficultyModeforChess } from "../features/boardgameFeatures/boardgameFeatures";
+export default function DifficultyPageforChess() {
+  const difficultyModeforChess = useSelector(
+    (state) => state.boardgame.difficultyModeforChess
+  );
+  const dispatch = useDispatch();
 
-export default function DifficultyPageforChess({
-  difficultyModeforChess,
-  setDifficultyModeforChess,
-  playerModeforChess,
-  setPlayerModeforChess,
-}) {
   const navigate = useNavigate();
   return (
     <div className="card">
@@ -17,7 +18,7 @@ export default function DifficultyPageforChess({
           <button
             className="difficultySelectorButton selected"
             onClick={() => {
-              setDifficultyModeforChess(1);
+              dispatch(setDifficultyModeforChess(1));
             }}
           >
             Level - 1
@@ -26,7 +27,7 @@ export default function DifficultyPageforChess({
           <button
             className="difficultySelectorButton"
             onClick={() => {
-              setDifficultyModeforChess(1);
+              dispatch(setDifficultyModeforChess(1));
             }}
           >
             Level - 1
@@ -36,7 +37,7 @@ export default function DifficultyPageforChess({
           <button
             className="difficultySelectorButton selected"
             onClick={() => {
-              setDifficultyModeforChess(2);
+              dispatch(setDifficultyModeforChess(2));
             }}
           >
             Level - 2
@@ -45,7 +46,7 @@ export default function DifficultyPageforChess({
           <button
             className="difficultySelectorButton"
             onClick={() => {
-              setDifficultyModeforChess(2);
+              dispatch(setDifficultyModeforChess(2));
             }}
           >
             Level - 2
@@ -57,7 +58,7 @@ export default function DifficultyPageforChess({
           <button
             className="difficultySelectorButton selected"
             onClick={() => {
-              setDifficultyModeforChess(3);
+              dispatch(setDifficultyModeforChess(3));
             }}
           >
             Level - 3
@@ -66,7 +67,7 @@ export default function DifficultyPageforChess({
           <button
             className="difficultySelectorButton"
             onClick={() => {
-              setDifficultyModeforChess(3);
+              dispatch(setDifficultyModeforChess(3));
             }}
           >
             Level - 3
@@ -76,7 +77,7 @@ export default function DifficultyPageforChess({
           <button
             className="difficultySelectorButton selected"
             onClick={() => {
-              setDifficultyModeforChess(4);
+              dispatch(setDifficultyModeforChess(4));
             }}
           >
             Level - 4
@@ -85,7 +86,7 @@ export default function DifficultyPageforChess({
           <button
             className="difficultySelectorButton"
             onClick={() => {
-              setDifficultyModeforChess(4);
+              dispatch(setDifficultyModeforChess(4));
             }}
           >
             Level - 4

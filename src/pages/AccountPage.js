@@ -5,9 +5,14 @@ import "./css/AccountPage.css";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { updateProfile, updatePassword } from "firebase/auth";
-const AccountPage = ({ setprogressbar, setUsername, username, email }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setProgressBar } from "../features/progressbarFeatures/progressbarFeatures";
+import { setUsernameId } from "../features/loginFeatures/loginFeatures";
+const AccountPage = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const email = useSelector((state) => state.loginData.email);
+  const username = useSelector((state) => state.loginData.username);
   const [usernam, setUsernam] = useState("defaultuser");
   const [password, setPassword] = useState("");
   const [userinitials, setUserinitials] = useState("SS");
@@ -18,7 +23,7 @@ const AccountPage = ({ setprogressbar, setUsername, username, email }) => {
       alert("Username and Password must be at least 6 characters long.");
       return;
     }
-    setprogressbar(true);
+    dispatch(setProgressBar(true));
     setdisabled(true);
     const user = auth.currentUser;
 
@@ -34,10 +39,10 @@ const AccountPage = ({ setprogressbar, setUsername, username, email }) => {
         console.log(error);
       });
 
-    setUsername(usernam);
+    dispatch(setUsernameId(usernam));
 
     setdisabled(false);
-    setprogressbar(false);
+    dispatch(setProgressBar(false));
   };
   const handleLogout = () => {
     signOut(auth)

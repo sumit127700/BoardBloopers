@@ -7,8 +7,10 @@ import auth from "../firebase";
 import { useNavigate } from "react-router-dom";
 import "./css/LoginPage.css";
 import { updateProfile } from "firebase/auth";
-
-const Signup = (props) => {
+import { useDispatch } from "react-redux";
+import { setProgressBar } from "../features/progressbarFeatures/progressbarFeatures";
+const Signup = () => {
+  const dispatch = useDispatch();
   const [state, setState] = React.useState({
     open: false,
 
@@ -33,7 +35,7 @@ const Signup = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setdisabled(true);
-    props.setprogressbar(true);
+    dispatch(setProgressBar(true));
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -43,13 +45,13 @@ const Signup = (props) => {
         const user = userCredential.user;
         navigate("/");
         setdisabled(false);
-        props.setprogressbar(false);
+        dispatch(setProgressBar(false));
 
         console.log(user);
       })
       .catch((error) => {
         handleClick({ vertical: "bottom", horizontal: "left" })();
-        props.setprogressbar(false);
+        dispatch(setProgressBar(false));
         setdisabled(false);
         const errorCode = error.code;
         const errorMessage = error.message;

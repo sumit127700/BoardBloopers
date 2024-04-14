@@ -3,10 +3,14 @@ import "./css/TicTacToe.css";
 import "./css/General.css";
 import getGoodMove from "./TicTacToe/getGoodMove";
 import { getOptimalMove } from "./TicTacToe/getOptimalMove";
-export default function TicTacToe({
-  playerModeforTicTacToe,
-  difficultyModeforTicTacToe,
-}) {
+import { useSelector } from "react-redux";
+export default function TicTacToe({}) {
+  const playerModeforTicTacToe = useSelector(
+    (state) => state.boardgame.playerModeforTicTacToe
+  );
+  const difficultyModeforTicTacToe = useSelector(
+    (state) => state.boardgame.difficultyModeforTicTacToe
+  );
   const [val, setVal] = useState("         ");
   const [chance, setChance] = useState(true);
   const [isXWinning, setXWinning] = useState(false);

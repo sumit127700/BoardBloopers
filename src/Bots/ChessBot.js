@@ -3,7 +3,11 @@ import { Chessboard } from "react-chessboard";
 import Chess from "./Chess/chess.js";
 import "./css/ChessBot.css";
 import minimaxRoot from "./Chess/ChessBotAlgo.js";
-const ChessBot = ({ difficultyModeforChess }) => {
+import { useSelector } from "react-redux";
+const ChessBot = () => {
+  const difficultyModeforChess = useSelector(
+    (state) => state.boardgame.difficultyModeforChess
+  );
   const [game, setGame] = useState(new Chess());
   const [isWhiteWinning, setIsWhiteWinning] = useState(false);
   const [isBlackWinning, setIsBlackWinning] = useState(false);

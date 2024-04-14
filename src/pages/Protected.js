@@ -1,12 +1,15 @@
+import { useSelector } from "react-redux";
 import Unauthorized from "../components/Unauthorized";
 
 function Protected(props) {
+  const checkinglogin = useSelector((state) => state.loginData.checkingLogin);
+  const isloggedin = useSelector((state) => state.loginData.isLoggedIn);
   return (
     <>
-      {props.checkinglogin ? (
+      {checkinglogin ? (
         <></>
-      ) : props.isloggedin ? (
-        <props.component {...props} />
+      ) : isloggedin ? (
+        <props.component />
       ) : (
         <Unauthorized />
       )}

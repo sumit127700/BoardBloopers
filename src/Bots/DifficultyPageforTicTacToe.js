@@ -1,14 +1,19 @@
 import "./css/TicTacToe.css";
 import "./css/General.css";
 import { useNavigate } from "react-router-dom";
-
+import {
+  setDifficultyModeforTicTacToe,
+  setPlayerModeforTicTacToe,
+} from "../features/boardgameFeatures/boardgameFeatures";
+import { useDispatch, useSelector } from "react-redux";
 function TrueSelectorButton({ difficultyMode, content, setValueforBtn }) {
+  const dispatch = useDispatch();
   if (difficultyMode)
     return (
       <button
         className="difficultySelectorButton selected"
         onClick={() => {
-          setValueforBtn(true);
+          dispatch(setValueforBtn(true));
         }}
       >
         {content}
@@ -19,7 +24,7 @@ function TrueSelectorButton({ difficultyMode, content, setValueforBtn }) {
       <button
         className="difficultySelectorButton"
         onClick={() => {
-          setValueforBtn(true);
+          dispatch(setValueforBtn(true));
         }}
       >
         {content}
@@ -28,12 +33,13 @@ function TrueSelectorButton({ difficultyMode, content, setValueforBtn }) {
   }
 }
 function FalseSelectorButton({ difficultyMode, content, setValueforBtn }) {
+  const dispatch = useDispatch();
   if (difficultyMode)
     return (
       <button
         className="difficultySelectorButton"
         onClick={() => {
-          setValueforBtn(false);
+          dispatch(setValueforBtn(false));
         }}
       >
         {content}
@@ -44,7 +50,7 @@ function FalseSelectorButton({ difficultyMode, content, setValueforBtn }) {
       <button
         className="difficultySelectorButton selected"
         onClick={() => {
-          setValueforBtn(false);
+          dispatch(setValueforBtn(false));
         }}
       >
         {content}
@@ -52,13 +58,15 @@ function FalseSelectorButton({ difficultyMode, content, setValueforBtn }) {
     );
   }
 }
-export default function DifficultyPageforTicTacToe({
-  difficultyModeforTicTacToe,
-  setDifficultyModeforTicTacToe,
-  playerModeforTicTacToe,
-  setPlayerModeforTicTacToe,
-}) {
+export default function DifficultyPageforTicTacToe() {
+  const difficultyModeforTicTacToe = useSelector(
+    (state) => state.boardgame.difficultyModeforTicTacToe
+  );
+  const playerModeforTicTacToe = useSelector(
+    (state) => state.boardgame.playerModeforTicTacToe
+  );
   const navigate = useNavigate();
+
   return (
     <div className="card">
       <div className="headerForBots">Select difficulty!</div>

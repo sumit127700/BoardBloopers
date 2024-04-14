@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "./firebase";
@@ -31,45 +31,22 @@ import {
 } from "./features/loginFeatures/loginFeatures";
 
 const App = () => {
-  const [username, setUsername] = useState("defaultUser");
-  const [isloggedin, setisloggedin] = useState(false);
-  const [checkinglogin, setcheckinglogin] = useState(false);
-  const [email, setEmail] = useState("defaultUser");
-  const [theme, setTheme] = useState("teal");
   const isOpen = useSelector((state) => state.sidebarData.isOpen);
-  const [difficultyModeforTicTacToe, setDifficultyModeforTicTacToe] =
-    useState(true);
-  const [playerModeforTicTacToe, setPlayerModeforTicTacToe] = useState(true);
-  const [difficultyModeforChess, setDifficultyModeforChess] = useState(1);
-  const [playerModeforChess, setPlayerModeforChess] = useState(true);
-  const [progressbar, setprogressbar] = useState(false);
-  const [colorheading, setColor] = useState("teal");
-  const [isSmallScreen, setSmallScreen] = useState("false");
+  const progressbar = useSelector((state) => state.progressBar.isProgressBar);
   const dispatch = useDispatch();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-
-        setUsername(user.displayName);
-        setEmail(user.email);
-        setisloggedin(true);
-        setcheckinglogin(false);
+        // User is logged in
         dispatch(setIsLoggedIn(true));
         dispatch(setCheckingLogin(false));
         dispatch(setEmailId(user.email));
         dispatch(setUsernameId(user.displayName));
-
         // ...
       } else {
         // User is signed out
         // ...
-        setUsername("User");
-        setEmail("defaultUserMail");
-        setisloggedin(false);
-        setcheckinglogin(false);
         dispatch(setIsLoggedIn(false));
         dispatch(setCheckingLogin(false));
         dispatch(setEmailId(""));
@@ -98,159 +75,33 @@ const App = () => {
               <Route path="" element={<BotPage />} />
               <Route
                 path="DifficultyPageforTicTacToe"
-                element={
-                  <Protected
-                    progressbar={progressbar}
-                    setprogressbar={setprogressbar}
-                    username={username}
-                    setUsername={setUsername}
-                    email={email}
-                    setEmail={setEmail}
-                    isloggedin={isloggedin}
-                    checkinglogin={checkinglogin}
-                    difficultyModeforTicTacToe={difficultyModeforTicTacToe}
-                    setDifficultyModeforTicTacToe={
-                      setDifficultyModeforTicTacToe
-                    }
-                    playerModeforTicTacToe={playerModeforTicTacToe}
-                    setPlayerModeforTicTacToe={setPlayerModeforTicTacToe}
-                    component={DifficultyPageforTicTacToe}
-                  />
-                }
+                element={<Protected component={DifficultyPageforTicTacToe} />}
               />
               <Route
                 path="TicTacToe"
-                element={
-                  <Protected
-                    progressbar={progressbar}
-                    setprogressbar={setprogressbar}
-                    username={username}
-                    setUsername={setUsername}
-                    email={email}
-                    setEmail={setEmail}
-                    isloggedin={isloggedin}
-                    checkinglogin={checkinglogin}
-                    difficultyModeforTicTacToe={difficultyModeforTicTacToe}
-                    setDifficultyModeforTicTacToe={
-                      setDifficultyModeforTicTacToe
-                    }
-                    playerModeforTicTacToe={playerModeforTicTacToe}
-                    setPlayerModeforTicTacToe={setPlayerModeforTicTacToe}
-                    component={TicTacToe}
-                  />
-                }
+                element={<Protected component={TicTacToe} />}
               />
               <Route
                 path="ChessBot"
-                element={
-                  <Protected
-                    progressbar={progressbar}
-                    setprogressbar={setprogressbar}
-                    username={username}
-                    setUsername={setUsername}
-                    email={email}
-                    setEmail={setEmail}
-                    isloggedin={isloggedin}
-                    checkinglogin={checkinglogin}
-                    difficultyModeforChess={difficultyModeforChess}
-                    setDifficultyModeforChess={setDifficultyModeforChess}
-                    playerModeforChess={playerModeforChess}
-                    setPlayerModeforChess={setPlayerModeforChess}
-                    component={ChessBot}
-                  />
-                }
+                element={<Protected component={ChessBot} />}
               />
               <Route
                 path="DifficultyPageforChess"
-                element={
-                  <Protected
-                    progressbar={progressbar}
-                    setprogressbar={setprogressbar}
-                    username={username}
-                    setUsername={setUsername}
-                    email={email}
-                    setEmail={setEmail}
-                    isloggedin={isloggedin}
-                    checkinglogin={checkinglogin}
-                    difficultyModeforChess={difficultyModeforChess}
-                    setDifficultyModeforChess={setDifficultyModeforChess}
-                    playerModeforChess={playerModeforChess}
-                    setPlayerModeforChess={setPlayerModeforChess}
-                    component={DifficultyPageforChess}
-                  />
-                }
+                element={<Protected component={DifficultyPageforChess} />}
               />
             </Route>
-            <Route
-              path="/LoginPage"
-              element={
-                <LoginPage
-                  progressbar={progressbar}
-                  setprogressbar={setprogressbar}
-                  username={username}
-                  setUsername={setUsername}
-                  email={email}
-                  setEmail={setEmail}
-                />
-              }
-            />
-            <Route
-              path="/SignupPage"
-              element={
-                <Signup
-                  progressbar={progressbar}
-                  setprogressbar={setprogressbar}
-                  username={username}
-                  setUsername={setUsername}
-                  email={email}
-                  setEmail={setEmail}
-                />
-              }
-            />
+            <Route path="/LoginPage" element={<LoginPage />} />
+            <Route path="/SignupPage" element={<Signup />} />
             <Route
               path="/AccountPage"
-              element={
-                <Protected
-                  progressbar={progressbar}
-                  setprogressbar={setprogressbar}
-                  username={username}
-                  setUsername={setUsername}
-                  email={email}
-                  setEmail={setEmail}
-                  isloggedin={isloggedin}
-                  checkinglogin={checkinglogin}
-                  component={AccountPage}
-                />
-              }
+              element={<Protected component={AccountPage} />}
             />
             <Route
               path="/Friends"
-              element={
-                <Protected
-                  progressbar={progressbar}
-                  setprogressbar={setprogressbar}
-                  username={username}
-                  setUsername={setUsername}
-                  email={email}
-                  setEmail={setEmail}
-                  isloggedin={isloggedin}
-                  checkinglogin={checkinglogin}
-                  component={Friends}
-                />
-              }
+              element={<Protected component={Friends} />}
             />
 
-            <Route
-              path="/ThemePage"
-              element={
-                <ThemePage
-                  theme={theme}
-                  settheme={setTheme}
-                  colorheading={colorheading}
-                  setColor={setColor}
-                />
-              }
-            />
+            <Route path="/ThemePage" element={<ThemePage />} />
           </Routes>
         </div>
         <Snackbars />
