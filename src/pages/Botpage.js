@@ -6,7 +6,7 @@ function BotPage() {
   const navigate = useNavigate();
   return (
     <ColumnButtons
-      isFirstButton={true}
+      isFirstButton={false}
       isSecondButton={true}
       isThirdButton={false}
       isFourthButton={false}
